@@ -1,0 +1,84 @@
+// main: ../../main.scss
+
+/*
+  BLOCK BOARD GAME
+*/
+
+
+
+.b-board {
+  width: 250px;
+  margin: 0 auto;
+  height: auto;
+  position: relative;
+  /*.r-0 {
+    .c-0 {
+      position: relative;
+      &:after {
+        content: "A";
+        position: absolute;
+      }
+    }
+  }*/
+  .board-disabled {
+    background-color: rgba(0,0,0,0.3);
+    height: 100%;
+    width: 100%;
+    position: absolute;
+    p {
+      position: relative;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+    }
+  }
+  .board-row {
+    .board-col {
+      width: 25px;
+      height: 25px;
+      display: inline-block;
+      margin-bottom: -5px;
+      background-color: #22979E;
+      box-shadow: inset 1px 1px 0 rgba(255,255,255,0.3);
+    }
+  }
+  &#human {
+    .board-row {
+      .board-col {
+        &.two-cell-ship {
+          background-color: green;
+        }
+        &.three-cell-ship {
+          background-color: orange;
+        }
+        &:hover {
+          background-color: rgba(140,0,20,0.3);
+          & + div {
+            background-color: rgba(140,0,20,0.3);
+          }
+        }
+      }
+    }
+  }
+  &#computer {
+    .board-row {
+      .board-col {
+        &.target {
+          background-color: rgba(140,0,20,0.3);
+        }
+        &.two-cell-ship {
+          background-color: grey;
+        }
+        &.three-cell-ship {
+          background-color: black;
+          &.target {
+            background-color: rgba(140,0,20,0.3);
+          }
+        }
+        &:hover {
+          background-color: red;
+        }
+      }
+    }
+  }
+}

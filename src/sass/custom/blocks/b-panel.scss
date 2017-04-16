@@ -1,0 +1,16 @@
+// main: ../../main.scss
+
+/*
+  BLOCK INFORMATION PANEL
+*/
+
+.b-panel {
+  height: 250px;
+  width: 250px;
+  margin: 0 auto;
+  border-radius: 50%;
+  &.s-1 {
+    background-image: url("../img/gif/sea-1.gif");
+    background-size: cover;
+  }
+}

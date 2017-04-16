@@ -1,89 +1,47 @@
-var MemoryGame = function() {
-  this.Cards = [
-  		{ name: "aquaman",         img: "aquaman.jpg" },
-  		{ name: "batman",          img: "batman.jpg" },
-  		{ name: "captain america", img: "captain-america.jpg" },
-  		{ name: "fantastic four",  img: "fantastic-four.jpg" },
-  		{ name: "flash",           img: "flash.jpg" },
-      { name: "green arrow",     img: "green-arrow.jpg" },
-  		{ name: "green lantern",   img: "green-lantern.jpg" },
-  		{ name: "ironman",         img: "ironman.jpg" },
-  		{ name: "spiderman",       img: "spiderman.jpg" },
-  		{ name: "superman",        img: "superman.jpg" },
-  		{ name: "the avengers",    img: "the-avengers.jpg" },
-  		{ name: "thor",            img: "thor.jpg" },
-      { name: "aquaman",         img: "aquaman.jpg" },
-  		{ name: "batman",          img: "batman.jpg" },
-  		{ name: "captain america", img: "captain-america.jpg" },
-      { name: "fantastic four",  img: "fantastic-four.jpg" },
-  		{ name: "flash",           img: "flash.jpg" },
-  		{ name: "green arrow",     img: "green-arrow.jpg" },
-  		{ name: "green lantern",   img: "green-lantern.jpg" },
-  		{ name: "ironman",         img: "ironman.jpg" },
-  		{ name: "spiderman",       img: "spiderman.jpg" },
-  		{ name: "superman",        img: "superman.jpg" },
-  		{ name: "the avengers",    img: "the-avengers.jpg" },
-  		{ name: "thor",            img: "thor.jpg" },
-  	];
-  this.picked_cards  = [];
-  this.pairs_clicked = 0;
-  this.pairs_guessed = 0;
-  this._shuffleCard();
-};
-// this function just takes the array of cards above and shuffles them into a random order
-MemoryGame.prototype._shuffleCard = function() {
-  var counter = this.Cards.length;
-  while (counter > 0) {
-    index = Math.floor(Math.random() * counter);
-    counter--;
-    temp = this.Cards[counter];
-    this.Cards[counter] = this.Cards[index];
-    this.Cards[index] = temp;
-  }
-  return;
-};
+function Board(user,size) {
+  this.user = user;
+  this.size = size;
+  this.grid = [];
+  this._buildGrid();
+  this._printGrid();
+}
 
-MemoryGame.prototype.matchCards = function(array){
-  var compare = array[0] === array[1];
-  return compare;
-
-};
-
-
-var memoryGame;
-
-$(document).ready(function(){
-
-  memoryGame = new MemoryGame();
-
-  function printGrid(){
-    for(var i = 0; i < memoryGame.Cards.length;i++){
-      $("#memory_board").append("<div ID="+i+" class='pic "+memoryGame.Cards[i].name+"'></div>");
+Board.prototype._buildGrid = function () {
+  for(var i = 0; i < this.size; i++) {
+    this.grid[i] = {
+      classRow: "board-row",
+      classIdRow: "r-"+i
+    };
+    for(var j = 0; j < this.size; j++) {
+      this.grid[i][j] = {
+        classCol: "board-col",
+        classIdCol: "c-"+j
+      };
     }
   }
-  printGrid();
+};
 
-  $("#memory_board .pic").on("click",function(){
-
-
-
-
-    var picId = $(this).attr('id');
-    $(this).css("background-image", "url(img/"+memoryGame.Cards[picId].img+")");
-
-    var classString = $(this).attr('class').split(' ').pop();
-    memoryGame.picked_cards.push(classString);
-    memoryGame.pairs_clicked++;
-
-    if(memoryGame.pairs_clicked % 2 === 0){
-
-      console.log("CLICKADO DOS VECES");
-      if(memoryGame.matchCards(memoryGame.picked_cards)){
-        console.log("ENCONTRADO PARES");
-      }
+Board.prototype._printGrid = function () {
+  for(var i = 0; i < this.grid.length; i++){
+    $("#"+ this.user).append("<div class='"+this.grid[i].classRow+" "+this.grid[i].classIdRow+"'></div>");
+    for(var j = 0; j < this.grid.length; j++){
+      $("#"+ this.user).children("."+this.grid[i].classIdRow).append("<div class='"+this.grid[i][j].classCol+" "+this.grid[i][j].classIdCol+"'></div>");
     }
+  }
+};
 
-  });
+Board.prototype.shipRandomComputer = function() {
+  var index1 = Math.floor(Math.random() * 10);
+  var index2 = Math.floor(Math.random() * 10);
+  var index3 = Math.floor(Math.random() * 10);
+  var index4 = Math.floor(Math.random() * 10);
+  $("#computer").children(".r-"+index1).children(".c-"+index2).addClass("two-cell-ship").next().addClass("two-cell-ship");
+  $("#computer").children(".r-"+index3).children(".c-"+index4).addClass("three-cell-ship").next().addClass("three-cell-ship").next().addClass("three-cell-ship");
+};
 
 
-});
+$("#human").append("<div class='board-disabled'><p>Locate your warships</p></div>");
+$("#computer").append("<div class='board-disabled'></div>");
+
+var userHumanBoard = new Board("human",10);
+var userComputerBoard = new Board("computer",10);

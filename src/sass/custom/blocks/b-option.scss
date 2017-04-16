@@ -1,0 +1,45 @@
+// main: ../../main.scss
+
+/*
+  BLOCK OPTION
+*/
+
+.b-option {
+  width: 250px;
+  margin: 0 auto;
+  height: auto;
+  .current-ships {
+    ul {
+      margin: 0;
+      padding: 0;
+      li {
+        list-style-type: none;
+        .btn-ship {
+          touch-action: manipulation;
+          border: 1px solid transparent;
+          -webkit-user-select: none;
+          -moz-user-select: none;
+          -ms-user-select: none;
+          user-select: none;
+          background-size: cover;
+          background-repeat: no-repeat;
+          background-color: transparent;
+          margin: 0;
+          padding: 0;
+          path {
+            fill: #000000;
+          }
+          &[disabled="disabled"] {
+            path {
+              fill: grey;
+            }
+          }
+        }
+        small {
+          width: 100%;
+          display: inline-block;
+        }
+      }
+    }
+  }
+}

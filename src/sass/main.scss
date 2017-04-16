@@ -1,7 +1,14 @@
 // compileCompressed: ../css/main.min.css﻿
 
+// Bootstrap
 @import "bootstrap/bootstrap.scss";
+
+// Custom
 @import "custom/colors.scss";
 @import "custom/custom.scss";
-@import "custom/layout.scss";
-@import "custom/blocks/blocks.scss";
+
+// Blocks
+@import "custom/blocks/b-board.scss";
+@import "custom/blocks/b-panel.scss";
+@import "custom/blocks/b-report.scss";
+@import "custom/blocks/b-option.scss";
