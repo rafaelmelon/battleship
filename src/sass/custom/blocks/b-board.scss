@@ -21,6 +21,7 @@
     }
   }*/
   .board-disabled {
+    display: block;
     background-color: rgba(0,0,0,0.3);
     height: 100%;
     width: 100%;
@@ -30,6 +31,11 @@
       top: 50%;
       left: 50%;
       transform: translate(-50%, -50%);
+    }
+  }
+  &.enabled {
+    .board-disabled {
+      display: none;
     }
   }
   .board-row {
@@ -45,17 +51,30 @@
   &#human {
     .board-row {
       .board-col {
+        &.target {
+          background-color: #01767D;
+        }
         &.two-cell-ship {
-          background-color: green;
+          background-color: blue;
+          &.target {
+            &.touched {
+              background-color: red;
+            }
+          }
         }
         &.three-cell-ship {
-          background-color: orange;
+          background-color: yellow;
+          &.target {
+            &.touched {
+              background-color: red;
+            }
+          }
         }
         &:hover {
           background-color: rgba(140,0,20,0.3);
-          & + div {
+          /*& + div {
             background-color: rgba(140,0,20,0.3);
-          }
+          }*/
         }
       }
     }
@@ -64,19 +83,26 @@
     .board-row {
       .board-col {
         &.target {
-          background-color: rgba(140,0,20,0.3);
+          background-color: #01767D;
         }
         &.two-cell-ship {
-          background-color: grey;
+          background-color: blue;
+          &.target {
+            &.touched {
+              background-color: red;
+            }
+          }
         }
         &.three-cell-ship {
-          background-color: black;
+          background-color: yellow;
           &.target {
-            background-color: rgba(140,0,20,0.3);
+            &.touched {
+              background-color: red;
+            }
           }
         }
         &:hover {
-          background-color: red;
+          background-color: rgba(140,0,20,0.3);
         }
       }
     }

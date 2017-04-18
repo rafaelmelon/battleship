@@ -6,6 +6,7 @@ function Board(user,size) {
   this._printGrid();
 }
 
+// BOARD - CONSTRUYO EL GRID EN EL OBJETO
 Board.prototype._buildGrid = function () {
   for(var i = 0; i < this.size; i++) {
     this.grid[i] = {
@@ -21,6 +22,9 @@ Board.prototype._buildGrid = function () {
   }
 };
 
+
+
+// BOARD - PINTO EL GRID EN EL DOM DESDE LAS PROPIEDADES DEL OBJETO
 Board.prototype._printGrid = function () {
   for(var i = 0; i < this.grid.length; i++){
     $("#"+ this.user).append("<div class='"+this.grid[i].classRow+" "+this.grid[i].classIdRow+"'></div>");
@@ -30,18 +34,6 @@ Board.prototype._printGrid = function () {
   }
 };
 
-Board.prototype.shipRandomComputer = function() {
-  var index1 = Math.floor(Math.random() * 10);
-  var index2 = Math.floor(Math.random() * 10);
-  var index3 = Math.floor(Math.random() * 10);
-  var index4 = Math.floor(Math.random() * 10);
-  $("#computer").children(".r-"+index1).children(".c-"+index2).addClass("two-cell-ship").next().addClass("two-cell-ship");
-  $("#computer").children(".r-"+index3).children(".c-"+index4).addClass("three-cell-ship").next().addClass("three-cell-ship").next().addClass("three-cell-ship");
-};
-
-
-$("#human").append("<div class='board-disabled'><p>Locate your warships</p></div>");
-$("#computer").append("<div class='board-disabled'></div>");
-
+// BOARD - CREO LOS MAPAS DE LOS JUGADORES
 var userHumanBoard = new Board("human",10);
 var userComputerBoard = new Board("computer",10);

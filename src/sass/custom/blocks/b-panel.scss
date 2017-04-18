@@ -10,7 +10,10 @@
   margin: 0 auto;
   border-radius: 50%;
   &.s-1 {
-    background-image: url("../img/gif/sea-1.gif");
+
+    background-image: url(../img/gif/shot-2.gif);
     background-size: cover;
+    box-shadow: inset 5px 0px 30px rgba(0,0,0,0.8);
+    border: 10px solid #e9e9e9;
   }
 }

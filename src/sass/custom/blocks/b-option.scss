@@ -8,12 +8,13 @@
   width: 250px;
   margin: 0 auto;
   height: auto;
-  .current-ships {
+  .ships {
     ul {
       margin: 0;
       padding: 0;
       li {
         list-style-type: none;
+        position: relative;
         .btn-ship {
           touch-action: manipulation;
           border: 1px solid transparent;
@@ -36,8 +37,13 @@
           }
         }
         small {
-          width: 100%;
-          display: inline-block;
+          position: absolute;
+          top: 0;
+          right: 0;
+          display: none;
+        }
+        &.current {
+          
         }
       }
     }
