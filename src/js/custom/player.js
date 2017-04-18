@@ -25,7 +25,7 @@ var userComputer = new Player(
 );
 
 // HUMAN - OBTENGO EL NOMBRE DE USUARIO Y LA SELECCIÓN DE LA ARMADA
-function getSubmit(){
+Player.prototype.getSubmit = function() {
 
   userHuman.name = $(".js-user-id").val();
   userHuman.navy = $('input[name=navyOption]:checked').val();
@@ -51,35 +51,32 @@ function getSubmit(){
 
   $('#computer-section .js-player-name').append(userComputer.name);
   $('#computer-section .js-player-navy').append(userComputer.navy);
-}
+};
 
 
 
 // HUMAN - OBTENGO EL TIPO DE BARCO EN EL DATA-ATTRIBUTE
-function shipSelection(){
+Player.prototype.shipSelection = function() {
   var shipDataType = $(this).data("ship-type");
   userHuman.shipSelectedName.push(shipDataType);
   $(this).attr('disabled', 'disabled');
   $("#human.b-board").addClass("enabled");
-}
+};
 
 // HUMAN - EJECUTA SCORE EN PANTALLA
-function humanScore(){
+Player.prototype.humanScore = function() {
   $("#human .p-stat.score span").text(userHuman.score);
-}
+};
 
 // HUMAN - FUNCIÓN PARA DETECTAR EN EL MAPA LOS BARCOS
-function humanTarget(){
-
-
-
+Player.prototype.humanTarget = function() {
   var random1 = Math.floor(Math.random() * 10),
   random2 = Math.floor(Math.random() * 10);
 
   //userHuman.target.push(["r-"+random1,"c-"+random2]);
 
   if($("#human").children(".r-"+random1).children(".c-"+random2).hasClass("target")){
-    humanTarget();
+    Player.prototype.humanTarget();
   }else{
     $("#human").children(".r-"+random1).children(".c-"+random2).addClass("target");
   }
@@ -99,10 +96,10 @@ function humanTarget(){
       $('.b-report .news').append("<p>"+userHuman.name+": Destructor touched!</p>");
     }
   }
-}
+};
 
 // COMPUTER - FUNCIÓN PARA DETECTAR EN EL MAPA LOS BARCOS
-function computerTarget(){
+Player.prototype.computerTarget = function() {
 
   $(this).addClass("target");
   $(".two-cell-ship.target").addClass("touched");
@@ -134,13 +131,13 @@ function computerTarget(){
       userHuman.score += 25;
     }
   }
-  humanTarget();
-  humanScore();
+  Player.prototype.humanTarget();
+  Player.prototype.humanScore();
 
-}
+};
 
 // HUMAN/COMPUTER - SETINTERVAL
-function timeRemaining(){
+function timeRemaining() {
   if(!$("#human .p-stat.time-remaining span").hasClass('pauseTiming')) { //only run if it hasn't got this class 'pauseInterval'
     console.log('game timing...');
     userHuman.timing += 1;
@@ -156,13 +153,13 @@ function timeRemaining(){
 var startTimining = window.setInterval(timeRemaining, 1000);
 
 // COMPUTER - BOTÓN QUE EJECUTA EL INICIO DEL JUEGO
-function initGame(){
+Player.prototype.initGame = function() {
   $(this).attr('disabled', 'disabled');
   $("#computer.b-board").addClass("enabled");
-  setShipBoard_randomComputer();
+  Player.prototype.setShipBoard_randomComputer();
   /*// TIME CONTROL //*/ $("#human .p-stat.time-remaining span").removeClass();
   window.setInterval(timeRemaining, 1000);
-}
+};
 
 
 
@@ -170,14 +167,14 @@ $(document).ready(function(){
 
   //$(".js-modal-player").modal('show');
 
-  //$(".js-submit").on("click",getSubmit);
+  //$(".js-submit").on("click",Player.prototype.getSubmit);
 
-  $(".js-get-ship").on("click",shipSelection);
+  $(".js-get-ship").on("click",Player.prototype.shipSelection);
 
-  $(document.body).on('click','.board-col',setShipBoard);
+  $(document.body).on('click','.board-col',Player.prototype.setShipBoard);
 
-  $(document.body).on('click','#computer .board-col',computerTarget);
+  $(document.body).on('click','#computer .board-col',Player.prototype.computerTarget);
 
-  $(".js-init-game").on("click",initGame);
+  $(".js-init-game").on("click",Player.prototype.initGame);
 
 });

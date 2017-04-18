@@ -1,6 +1,5 @@
 // HUMAN - AGREGO LOS BARCOS
-function setShipBoard(){
-
+Player.prototype.setShipBoard = function() {
   var cellClassRow = $(this).parent().attr('class').split(' '),
   cellClassCol = $(this).attr('class').split(' '),
   cellValueRow = cellClassRow[1],
@@ -63,11 +62,11 @@ function setShipBoard(){
     $('.js-init-game').attr('disabled', 'disabled');
   }
   $('#human-section .b-option .ships .current span').text(userHuman.cellSelected.length);
-}
+};
 
 
 // COMPUTER- AGREGO LOS BARCOS ALEATORIAMENTE
-function setShipBoard_randomComputer() {
+Player.prototype.setShipBoard_randomComputer = function() {
   var random1 = Math.floor(Math.random() * 10),
   random2 = Math.floor(Math.random() * 10),
   random3 = Math.floor(Math.random() * 10),
@@ -123,4 +122,4 @@ function setShipBoard_randomComputer() {
 
   userComputer.cellSelected.push(["r-"+random1,"c-"+random2],["r-"+random3,"c-"+random4]);
   $('#computer-section .b-option .ships .current span').text(userComputer.cellSelected.length);
-}
+};
