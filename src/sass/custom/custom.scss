@@ -18,20 +18,20 @@ html,body{
 .g-board {
   //background-color: #ffffff;
   //background-image: url(../img/pattern/redox_01.png);
-  border: 2px solid #f1f1f1;
+  border: 5px solid #262626;
   text-align: center;
   padding: 10px 0;
   &.ImperialJapaneseNavy {
-    border: 2px solid yellow;
+    border: 5px solid yellow;
   }
   &.ImperialGermanNavy {
-    border: 2px solid black;
+    border: 5px solid black;
   }
   &.UnitedStatesNavy {
-    border: 2px solid blue;
+    border: 5px solid blue;
   }
   &.SovietUnionNavy {
-    border: 2px solid red;
+    border: 5px solid red;
   }
   header {
     margin-bottom: 10px;

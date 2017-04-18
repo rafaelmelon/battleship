@@ -5,16 +5,31 @@
 */
 
 .b-panel {
-  height: 250px;
-  width: 250px;
+  height: 260px;
+  width: 260px;
   margin: 0 auto;
   border-radius: 50%;
-  
-  &.s-1 {
 
-    background-image: url(../img/gif/shot-2.gif);
-    background-size: cover;
-    box-shadow: inset 5px 0px 30px rgba(0,0,0,0.8);
-    border: 10px solid #e9e9e9;
+  background-size: cover;
+  background-position: 50% 0;
+  box-shadow: inset 10px 0px 30px rgba(0,0,0,0.4);
+  border: 5px solid #262626;;
+  &[data-class=sea] {
+    background-image: url(../img/gif/sea-1.gif);
+  }
+  &[data-class=shot] {
+    background-image: url(../img/gif/shot-3.gif);
+  }
+  &[data-class=touch] {
+    background-image: url(../img/gif/touch-1.gif);
+  }
+  &[data-class=sunken] {
+    background-image: url(../img/gif/sunken-4.gif);
+  }
+  &[data-class=victory] {
+    background-image: url(../img/gif/victory-1.gif);
+  }
+  &[data-class=lose] {
+    background-image: url(../img/gif/lose-1.gif);
   }
 }

@@ -2,11 +2,19 @@ var Player = function(name,navy){
   this.name = name;
   this.navy = navy;
   this.score = 0;
+  this.timing = 0;
   this.shipSelectedName = [];
   this.cellSelected = [];
   this.cellFregate = {};
   this.cellDestructor = {};
   this.target = [];
+};
+
+Player.prototype.inter = function() {
+  var t = setInterval(function(){
+    console.log("PEDO");
+    clearInterval(t);
+  },1000);
 };
 
 // HUMAN/COMPUTER - CREO LOS JUGADORES
@@ -45,6 +53,8 @@ function getSubmit(){
   $('#computer-section .js-player-navy').append(userComputer.navy);
 }
 
+
+
 // HUMAN - OBTENGO EL TIPO DE BARCO EN EL DATA-ATTRIBUTE
 function shipSelection(){
   var shipDataType = $(this).data("ship-type");
@@ -56,11 +66,13 @@ function shipSelection(){
 // HUMAN - EJECUTA SCORE EN PANTALLA
 function humanScore(){
   $("#human .p-stat.score span").text(userHuman.score);
-
 }
 
 // HUMAN - FUNCIÓN PARA DETECTAR EN EL MAPA LOS BARCOS
 function humanTarget(){
+
+
+
   var random1 = Math.floor(Math.random() * 10),
   random2 = Math.floor(Math.random() * 10);
 
@@ -91,6 +103,7 @@ function humanTarget(){
 
 // COMPUTER - FUNCIÓN PARA DETECTAR EN EL MAPA LOS BARCOS
 function computerTarget(){
+
   $(this).addClass("target");
   $(".two-cell-ship.target").addClass("touched");
   $(".three-cell-ship.target").addClass("touched");
@@ -103,6 +116,7 @@ function computerTarget(){
   for (var i = 0; i < userComputer.cellSelected.length; i++) {
     if(userComputer.cellFregate[i].row === cellValueRow && userComputer.cellFregate[i].col === cellValueCol){
 
+      //$(".b-panel").attr("data-class","touch");
       $('.b-report .news').append("<p>Enemy: Fregate touched!</p>");
       userHuman.score += 20;
       userComputer.cellFregate[i].row = 0;
@@ -110,33 +124,53 @@ function computerTarget(){
 
       if(userComputer.cellFregate[0].row === 0 && userComputer.cellFregate[1].row === 0){
         userHuman.score += 40;
+        //$(".b-panel").attr("data-class","sunken");
         $('.b-report .news').append("<p>Enemy: Fregate sunken!!!!</p>");
       }
     }
     if(userComputer.cellDestructor[i].row === cellValueRow && userComputer.cellDestructor[i].col === cellValueCol){
+      //$(".b-panel").attr("data-class","touch");
       $('.b-report .news').append("<p>Enemy: Destructor touched!</p>");
       userHuman.score += 25;
     }
   }
-
   humanTarget();
   humanScore();
 
 }
+
+// HUMAN/COMPUTER - SETINTERVAL
+function timeRemaining(){
+  if(!$("#human .p-stat.time-remaining span").hasClass('pauseTiming')) { //only run if it hasn't got this class 'pauseInterval'
+    console.log('game timing...');
+    userHuman.timing += 1;
+    $("#human .p-stat.time-remaining span").text(userHuman.timing); //just for explaining and showing
+    if(userHuman.timing === 100){
+      clearInterval(startTimining);
+      console.log('game timing OFF');
+    }
+  }else{
+    clearInterval(startTimining);
+  }
+}
+var startTimining = window.setInterval(timeRemaining, 1000);
 
 // COMPUTER - BOTÓN QUE EJECUTA EL INICIO DEL JUEGO
 function initGame(){
   $(this).attr('disabled', 'disabled');
   $("#computer.b-board").addClass("enabled");
   setShipBoard_randomComputer();
+  /*// TIME CONTROL //*/ $("#human .p-stat.time-remaining span").removeClass();
+  window.setInterval(timeRemaining, 1000);
 }
+
 
 
 $(document).ready(function(){
 
-  $(".js-modal-player").modal('show');
+  //$(".js-modal-player").modal('show');
 
-  $(".js-submit").on("click",getSubmit);
+  //$(".js-submit").on("click",getSubmit);
 
   $(".js-get-ship").on("click",shipSelection);
 

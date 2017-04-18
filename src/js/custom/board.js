@@ -22,8 +22,6 @@ Board.prototype._buildGrid = function () {
   }
 };
 
-
-
 // BOARD - PINTO EL GRID EN EL DOM DESDE LAS PROPIEDADES DEL OBJETO
 Board.prototype._printGrid = function () {
   for(var i = 0; i < this.grid.length; i++){
