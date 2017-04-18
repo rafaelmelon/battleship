@@ -20,6 +20,18 @@
       }
     }
   }*/
+  .p-stat {
+    position: absolute;
+    top: -20px;
+    font-size: 12px;
+    &.score {
+      left: 0;
+    }
+    &.time-remaining {
+      right: 0;
+    }
+  }
+
   .board-disabled {
     display: block;
     background-color: rgba(0,0,0,0.3);

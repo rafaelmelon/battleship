@@ -19,6 +19,12 @@
               <div class="js-player-navy"></div>
             </header>
             <div id="human" class="b-board">
+              <div class="p-stat score">
+                Score: <span>0</span>
+              </div>
+              <div class="p-stat time-remaining">
+                Time: <span>00</span>
+              </div>
               <div class='board-disabled'><p>Locate your warships</p></div>
             </div>
             <div class="b-option">
@@ -92,12 +98,9 @@
             <!--<div class="b-panel s-1"></div>-->
             <div class="b-report">
               <div class="news"></div>
-              <div class="score">
-                <p></p>
-              </div>
               <div class="info">
                 <button class="btn btn-success js-init-game" type="button" name="button" disabled="disabled">PLAY!</button>
-                <button class="btn btn-link js-reset-game" type="button" name="button">Reset game</button>
+                <!--<button class="btn btn-link js-reset-game" type="button" name="button">Reset game</button>-->
               </div>
             </div>
           </section>
@@ -105,8 +108,8 @@
         <div class="col-md-4">
           <section id="computer-section" class="g-board">
             <header>
-              <h2 class="h2">Computer</h2>
-              <div class="">Navy</div>
+              <h2 class="h2 js-player-name"></h2>
+              <div class="js-player-navy"></div>
             </header>
             <div id="computer" class="b-board">
               <div class='board-disabled'></div>
@@ -151,7 +154,7 @@
                 <input type="radio" name="navyOption" value="United States Navy">United States Navy
               </label>
               <label class="radio-inline">
-                <input type="radio" name="navyOption" value="Soviet Navy">Soviet Navy
+                <input type="radio" name="navyOption" value="Soviet Union Navy">Soviet Union Navy
               </label>
             </div>
           </div>
@@ -172,6 +175,7 @@
 
   <script type="text/javascript" src="src/js/custom/board.js"></script>
   <script type="text/javascript" src="src/js/custom/player.js"></script>
+  <script type="text/javascript" src="src/js/custom/data.js"></script>
   <script type="text/javascript" src="src/js/custom/game.js"></script>
 </body>
 </html>

@@ -16,7 +16,8 @@ html,body{
 }
 
 .g-board {
-  background-color: #ffffff;
+  //background-color: #ffffff;
+  //background-image: url(../img/pattern/redox_01.png);
   border: 2px solid #f1f1f1;
   text-align: center;
   padding: 10px 0;
@@ -29,7 +30,7 @@ html,body{
   &.UnitedStatesNavy {
     border: 2px solid blue;
   }
-  &.SovietNavy {
+  &.SovietUnionNavy {
     border: 2px solid red;
   }
   header {
