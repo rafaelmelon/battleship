@@ -3,18 +3,23 @@ var Player = function(name,navy){
   this.navy = navy;
   this.score = 0;
   this.timing = 0;
-  this.shipSelectedName = [];
+  this.sumShip1 = 0;
+  this.sumShip2 = 0;
+  this.sumShip3 = 0;
+  this.sumShip4 = 0;
+  this.getShipName = [];
+  this.setShipLength = [];
   this.cellSelected = [];
   this.cellFregate = {};
   this.cellDestructor = {};
-  this.target = [];
 };
 
-Player.prototype.inter = function() {
+Player.prototype.intervalComputerTarget = function() {
   var t = setInterval(function(){
     console.log("PEDO");
+    //$(".b-panel").attr("data-class","touch");
     clearInterval(t);
-  },1000);
+  },2000);
 };
 
 // HUMAN/COMPUTER - CREO LOS JUGADORES
@@ -53,19 +58,31 @@ Player.prototype.getSubmit = function() {
   $('#computer-section .js-player-navy').append(userComputer.navy);
 };
 
-
+// HUMAN - RESET DEL MAPA
+Player.prototype.clearSelection = function(){
+  userHuman.getShipName = [];
+  userHuman.cellSelected = [];
+  $(".js-get-ship").removeAttr("disabled");
+  $('.js-init-game').attr('disabled', 'disabled');
+  $('#human-section .b-option .ships .current span').text(userHuman.cellSelected.length);
+  $('.b-report .news').append("<p>"+userHuman.name+": reset map</p>");
+  $("#human").find(".board-col").removeClass("two-cell-ship");
+  $("#human").find(".board-col").removeClass("three-cell-ship");
+};
 
 // HUMAN - OBTENGO EL TIPO DE BARCO EN EL DATA-ATTRIBUTE
-Player.prototype.shipSelection = function() {
+Player.prototype.getShipBoard = function() {
   var shipDataType = $(this).data("ship-type");
-  userHuman.shipSelectedName.push(shipDataType);
+  userHuman.getShipName.push(shipDataType);
+  $(".btn-rotate").removeAttr("disabled");
+
   $(this).attr('disabled', 'disabled');
   $("#human.b-board").addClass("enabled");
 };
 
 // HUMAN - EJECUTA SCORE EN PANTALLA
 Player.prototype.humanScore = function() {
-  $("#human .p-stat.score span").text(userHuman.score);
+  $("#human .p-stat.score span").text(this.score);
 };
 
 // HUMAN - FUNCIÓN PARA DETECTAR EN EL MAPA LOS BARCOS
@@ -73,71 +90,113 @@ Player.prototype.humanTarget = function() {
   var random1 = Math.floor(Math.random() * 10),
   random2 = Math.floor(Math.random() * 10);
 
-  //userHuman.target.push(["r-"+random1,"c-"+random2]);
-
   if($("#human").children(".r-"+random1).children(".c-"+random2).hasClass("target")){
     Player.prototype.humanTarget();
   }else{
     $("#human").children(".r-"+random1).children(".c-"+random2).addClass("target");
-  }
 
-  for (var i = 0; i < userHuman.cellSelected.length; i++) {
-    if(userHuman.cellFregate[i].row === "r-"+random1 && userHuman.cellFregate[i].col === "c-"+random2){
+    if ($("#human").children(".r-"+random1).children(".c-"+random2).hasClass("two-cell-ship")) {
+      $("#human").children(".r-"+random1).children(".c-"+random2).addClass("touched");
+    }
+    if($("#human").children(".r-"+random1).children(".c-"+random2).hasClass("three-cell-ship")) {
+      $("#human").children(".r-"+random1).children(".c-"+random2).addClass("touched");
+    }
 
-      $('.b-report .news').append("<p>"+userHuman.name+": Fregate touched!</p>");
-      userHuman.cellFregate[i].row = 0;
-      userHuman.cellFregate[i].col = 0;
+    if(userHuman.cellFregate[0].row === "r-"+random1 && userHuman.cellFregate[0].col === "c-"+random2 ||
+      userHuman.cellFregate[1].row === "r-"+random1 && userHuman.cellFregate[1].col === "c-"+random2){
 
-      if(userHuman.cellFregate[0].row === 0 && userHuman.cellFregate[1].row ===0){
-        $('.b-report .news').append("<p>"+userHuman.name+": Fregate sunken!!!!</p>");
+      userHuman.sumShip1 += 1;
+
+      $('.b-report .news').append("<p>"+userHuman.name+": fregate touched!</p>");
+
+      if(userHuman.sumShip1 === 2){
+        $('.b-report .news').append("<p>"+userHuman.name+": fregate sunken!!!!</p>");
+        $(".js-get-ship[data-ship-type='fregate']").addClass("sunken");
+        userHuman.cellSelected.pop();
+        $('#human-section .b-option .ships .current span').text(userHuman.cellSelected.length);
       }
     }
-    if(userHuman.cellDestructor[i].row === "r-"+random1 && userHuman.cellDestructor[i].col === "c-"+random2){
-      $('.b-report .news').append("<p>"+userHuman.name+": Destructor touched!</p>");
+
+    if(userHuman.cellDestructor[0].row === "r-"+random1 && userHuman.cellDestructor[0].col === "c-"+random2 ||
+       userHuman.cellDestructor[1].row === "r-"+random1 && userHuman.cellDestructor[1].col === "c-"+random2 ||
+       userHuman.cellDestructor[2].row === "r-"+random1 && userHuman.cellDestructor[2].col === "c-"+random2){
+
+       userHuman.sumShip2 += 1;
+
+       $('.b-report .news').append("<p>"+userHuman.name+": destructor touched!</p>");
+
+       if(userHuman.sumShip2 === 3){
+         $('.b-report .news').append("<p>"+userHuman.name+": destructor sunken!!!!</p>");
+         $(".js-get-ship[data-ship-type='destructor']").addClass("sunken");
+         userHuman.cellSelected.pop();
+         $('#human-section .b-option .ships .current span').text(userHuman.cellSelected.length);
+       }
     }
   }
+
 };
 
 // COMPUTER - FUNCIÓN PARA DETECTAR EN EL MAPA LOS BARCOS
 Player.prototype.computerTarget = function() {
 
   $(this).addClass("target");
-  $(".two-cell-ship.target").addClass("touched");
-  $(".three-cell-ship.target").addClass("touched");
 
   var cellClassRow = $(this).parent().attr('class').split(' '),
   cellClassCol = $(this).attr('class').split(' '),
   cellValueRow = cellClassRow[1],
   cellValueCol = cellClassCol[1];
 
-  for (var i = 0; i < userComputer.cellSelected.length; i++) {
-    if(userComputer.cellFregate[i].row === cellValueRow && userComputer.cellFregate[i].col === cellValueCol){
+  if(userComputer.cellFregate[0].row === cellValueRow && userComputer.cellFregate[0].col === cellValueCol ||
+    userComputer.cellFregate[1].row === cellValueRow && userComputer.cellFregate[1].col === cellValueCol){
 
-      //$(".b-panel").attr("data-class","touch");
-      $('.b-report .news').append("<p>Enemy: Fregate touched!</p>");
-      userHuman.score += 20;
-      userComputer.cellFregate[i].row = 0;
-      userComputer.cellFregate[i].col = 0;
+    //userHuman.intervalComputerTarget();
+    userComputer.sumShip3 += 1;
 
-      if(userComputer.cellFregate[0].row === 0 && userComputer.cellFregate[1].row === 0){
-        userHuman.score += 40;
-        //$(".b-panel").attr("data-class","sunken");
-        $('.b-report .news').append("<p>Enemy: Fregate sunken!!!!</p>");
-      }
-    }
-    if(userComputer.cellDestructor[i].row === cellValueRow && userComputer.cellDestructor[i].col === cellValueCol){
-      //$(".b-panel").attr("data-class","touch");
-      $('.b-report .news').append("<p>Enemy: Destructor touched!</p>");
-      userHuman.score += 25;
+    $(this).addClass("touched");
+    $('.b-report .news').append("<p>Enemy: fregate touched! <span>+20</span></p>");
+    userHuman.score += 20;
+
+    if(userComputer.sumShip3 === 2){
+      userHuman.score += 40;
+      $('.b-report .news').append("<p>Enemy: fregate sunken!!!! <span>+40</span></p>");
+      $("span.btn-ship[data-ship-type='fregate']").addClass("sunken");
+      userComputer.cellSelected.pop();
+      $('#computer-section .b-option .ships .current span').text(userComputer.cellSelected.length);
     }
   }
-  Player.prototype.humanTarget();
-  Player.prototype.humanScore();
+
+  if(userComputer.cellDestructor[0].row === cellValueRow && userComputer.cellDestructor[0].col === cellValueCol ||
+     userComputer.cellDestructor[1].row === cellValueRow && userComputer.cellDestructor[1].col === cellValueCol ||
+     userComputer.cellDestructor[2].row === cellValueRow && userComputer.cellDestructor[2].col === cellValueCol){
+
+     userComputer.sumShip4 += 1;
+
+     $(this).addClass("touched");
+     $('.b-report .news').append("<p>Enemy: destructor touched! <span>+25</span></p>");
+     userHuman.score += 25;
+
+     if(userComputer.sumShip4 === 3){
+       userHuman.score += 50;
+       $('.b-report .news').append("<p>Enemy: destructor sunken!!!! <span>+50</span></p>");
+       $("span.btn-ship[data-ship-type='destructor']").addClass("sunken");
+       userComputer.cellSelected.pop();
+       $('#computer-section .b-option .ships .current span').text(userComputer.cellSelected.length);
+     }
+  }
+
+  userComputer.humanTarget();
+  userHuman.humanScore();
+
+  if (userComputer.cellSelected.length === 0 && userHuman.cellSelected.length > 0) {
+    $('.b-report .news').append("<p><span>"+userHuman.name+" WIN!!</span></p>");
+  }else if (userHuman.cellSelected.length === 0 && userComputer.cellSelected.length > 0) {
+    $('.b-report .news').append("<p><span>The enemy has defeated you</span></p>");
+  }
 
 };
 
 // HUMAN/COMPUTER - SETINTERVAL
-function timeRemaining() {
+/*function timeRemaining() {
   if(!$("#human .p-stat.time-remaining span").hasClass('pauseTiming')) { //only run if it hasn't got this class 'pauseInterval'
     console.log('game timing...');
     userHuman.timing += 1;
@@ -150,18 +209,30 @@ function timeRemaining() {
     clearInterval(startTimining);
   }
 }
-var startTimining = window.setInterval(timeRemaining, 1000);
+var startTimining = window.setInterval(timeRemaining, 1000);*/
 
 // COMPUTER - BOTÓN QUE EJECUTA EL INICIO DEL JUEGO
 Player.prototype.initGame = function() {
   $(this).attr('disabled', 'disabled');
   $("#computer.b-board").addClass("enabled");
+  $('.b-report .news').append("<p>The battle begins!</p>");
   Player.prototype.setShipBoard_randomComputer();
+
+  $(".js-clear-board").attr('disabled', 'disabled');
   /*// TIME CONTROL //*/ $("#human .p-stat.time-remaining span").removeClass();
-  window.setInterval(timeRemaining, 1000);
+  //window.setInterval(timeRemaining, 1000);
 };
 
-
+Player.prototype.rotate = function() {
+  $('#human').toggleClass("shipVertical");
+  $(this).toggleClass("btn-shipVertical");
+  if ($(this).is(".btn-shipVertical")) {
+    $("#human .p-stat.direction span").text("Vertical battleship");
+    $('.b-report .news').append("<p><span>"+userHuman.name+": the battleship is oriented vertitcally</span></p>");
+  } else {
+    $("#human .p-stat.direction span").text("the battleship is oriented horizontally");
+  }
+};
 
 $(document).ready(function(){
 
@@ -169,9 +240,13 @@ $(document).ready(function(){
 
   //$(".js-submit").on("click",Player.prototype.getSubmit);
 
-  $(".js-get-ship").on("click",Player.prototype.shipSelection);
+  $(".js-clear-board").on("click",userHuman.clearSelection);
 
-  $(document.body).on('click','.board-col',Player.prototype.setShipBoard);
+  $(".js-get-ship").on("click",userHuman.getShipBoard);
+
+  $(document.body).on('click','.board-col',userHuman.setShipBoard);
+
+  $('.btn-rotate').on('click',userHuman.rotate);
 
   $(document.body).on('click','#computer .board-col',Player.prototype.computerTarget);
 

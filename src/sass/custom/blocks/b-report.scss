@@ -5,13 +5,20 @@
 */
 
 .b-report {
-  width: 250px;
-  margin: 0 auto;
   height: auto;
+  width: 250px;
+  margin: 0 auto 20px auto;
   .news {
     height: 150px;
-    background-color: #ffffff;
-    overflow-y: scroll;
+    background-color: $grey-2;
+    overflow: auto;
+    text-align: left;
+    margin-bottom: 20px;
+    padding: 2px 5px;
+    font-size: 12px;
+    p {
+      margin: 0;
+    }
   }
   .info {
 

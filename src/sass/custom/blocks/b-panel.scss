@@ -7,13 +7,13 @@
 .b-panel {
   height: 260px;
   width: 260px;
-  margin: 0 auto;
+  margin: 0 auto 20px auto;
   border-radius: 50%;
 
   background-size: cover;
   background-position: 50% 0;
   box-shadow: inset 10px 0px 30px rgba(0,0,0,0.4);
-  border: 5px solid #262626;;
+  border: 5px solid $grey-2;
   &[data-class=sea] {
     background-image: url(../img/gif/sea-1.gif);
   }
@@ -26,10 +26,10 @@
   &[data-class=sunken] {
     background-image: url(../img/gif/sunken-4.gif);
   }
-  &[data-class=victory] {
-    background-image: url(../img/gif/victory-1.gif);
+  &[data-class=win] {
+    background-image: url(../img/gif/win-1.gif);
   }
-  &[data-class=lose] {
-    background-image: url(../img/gif/lose-1.gif);
+  &[data-class=defeat] {
+    background-image: url(../img/gif/defeat-1.gif);
   }
 }

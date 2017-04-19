@@ -5,36 +5,37 @@
 */
 html,body{
   height: 100%;
+  //font-family: 'Bree Serif', serif;
 }
 
 .wrapper {
   height: 100%;
-  background-color: #ffffff;
+  background-color: $white;
   /*background-image: url("../img/bg/background2.jpg");
   background-size: cover;*/
   padding-top: 20px;
 }
 
 .g-board {
-  //background-color: #ffffff;
+  //background-color: $white;
   //background-image: url(../img/pattern/redox_01.png);
-  border: 5px solid #262626;
+  border: 5px solid $grey-2;
   text-align: center;
   padding: 10px 0;
   &.ImperialJapaneseNavy {
     border: 5px solid yellow;
   }
   &.ImperialGermanNavy {
-    border: 5px solid black;
+    border: 5px solid $grey-4;
   }
   &.UnitedStatesNavy {
     border: 5px solid blue;
   }
   &.SovietUnionNavy {
-    border: 5px solid red;
+    border: 5px solid $alert-1;
   }
   header {
-    margin-bottom: 10px;
+    margin-bottom: 20px;
     .h2 {
       min-height: 35px;
       margin: 0;
@@ -42,11 +43,5 @@ html,body{
     & > div {
       min-height: 35px;
     }
-  }
-  .b-board {
-    margin-bottom: 10px;
-  }
-  .b-option {
-    margin-bottom: 10px;
   }
 }

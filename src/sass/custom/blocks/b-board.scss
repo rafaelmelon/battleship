@@ -7,25 +7,27 @@
 
 
 .b-board {
-  width: 250px;
-  margin: 0 auto;
+  width: 260px;
+  margin: 0 auto 20px auto;
   height: auto;
   position: relative;
-  /*.r-0 {
-    .c-0 {
-      position: relative;
-      &:after {
-        content: "A";
-        position: absolute;
-      }
-    }
-  }*/
+  border: 5px solid $grey-2;
   .p-stat {
     position: absolute;
     top: -20px;
     font-size: 12px;
     &.score {
       left: 0;
+    }
+    &.direction {
+      left: 0;
+      right: 0;
+      span {
+        background-color: $alert-1;
+        color: $white;
+        padding: 0px 5px;
+        border-radius: 2px 2px 0 0;
+      }
     }
     &.time-remaining {
       right: 0;
@@ -56,21 +58,22 @@
       height: 25px;
       display: inline-block;
       margin-bottom: -5px;
-      background-color: #22979E;
+      background-color: $primary-1;
       box-shadow: inset 1px 1px 0 rgba(255,255,255,0.3);
+      cursor: pointer;
     }
   }
   &#human {
     .board-row {
       .board-col {
         &.target {
-          background-color: #01767D;
+          background-color: $primary-1-1;
         }
         &.two-cell-ship {
           background-color: blue;
           &.target {
             &.touched {
-              background-color: red;
+              background-color: $alert-1;
             }
           }
         }
@@ -78,7 +81,7 @@
           background-color: yellow;
           &.target {
             &.touched {
-              background-color: red;
+              background-color: $alert-1;
             }
           }
         }
@@ -101,7 +104,7 @@
           background-color: blue;
           &.target {
             &.touched {
-              background-color: red;
+              background-color: $alert-1;
             }
           }
         }
@@ -109,7 +112,7 @@
           background-color: yellow;
           &.target {
             &.touched {
-              background-color: red;
+              background-color: $alert-1;
             }
           }
         }
