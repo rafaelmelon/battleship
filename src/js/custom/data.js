@@ -1,9 +1,26 @@
-function computerRandomFregate(random) {
-
-}
-function computerRandomDestructor(random) {
-
-}
+Player.prototype.battleshipFregate = function(cells,row1,col1,row2,col2,row3,col3) {
+  this.cells = cells;
+  this.cellFregate = [{
+    row: row1,
+    col: col1
+  },{
+    row: row2,
+    col: col2
+  }];
+};
+Player.prototype.battleshipDestructor = function(cells,row1,col1,row2,col2,row3,col3) {
+  this.cells = cells;
+  this.cellDestructor = [{
+    row: row1,
+    col: col1
+  },{
+    row: row2,
+    col: col2
+  },{
+    row: row3,
+    col: col3
+  }];
+};
 
 // HUMAN - AGREGO LOS BARCOS
 Player.prototype.setShipBoard = function() {
@@ -12,32 +29,21 @@ Player.prototype.setShipBoard = function() {
   cellValueRow = cellClassRow[1],
   cellValueCol = cellClassCol[1];
 
-  /*
-  HUMAN - FREGATE warship
-  */
+  //\\//\\ HUMAN - FREGATE //\\//\\
   if(userHuman.getShipName[0] === "fregate" || userHuman.getShipName[1] === "fregate"){
 
     userHuman.setShipLength.push("fregate");
     userHuman.cellSelected.push([cellValueRow,cellValueCol]);
 
     if(!$('#human').hasClass("shipVertical")){
-
       $(this).addClass("two-cell-ship").next().addClass("two-cell-ship");
 
       var aFormat = cellValueCol.slice(-1),
       aFormat2 = Number(aFormat)+1,
       aFormat3 = "c-"+aFormat2;
 
-      userHuman.cellFregate = [{
-        row: cellValueRow,
-        col: cellValueCol
-      },{
-        row: cellValueRow,
-        col: aFormat3
-      }];
-
+      userHuman.battleshipFregate(2,cellValueRow,cellValueCol,cellValueRow,aFormat3);
     }else{
-
       var aRotateFormat = cellValueRow.slice(-1),
       aRotateFormat2 = Number(aRotateFormat)+1,
       aRotateFormat3 = "r-"+aRotateFormat2;
@@ -45,29 +51,19 @@ Player.prototype.setShipBoard = function() {
       $(this).addClass("two-cell-ship");
       $("#human").children("."+aRotateFormat3).children("."+cellValueCol).addClass("two-cell-ship");
 
-      userHuman.cellFregate = [{
-        row: cellValueRow,
-        col: cellValueCol
-      },{
-        row: aRotateFormat3,
-        col: cellValueCol
-      }];
-
+      userHuman.battleshipFregate(2,cellValueRow,cellValueCol,aRotateFormat3,cellValueCol);
     }
 
     userHuman.getShipName = [];
     $('.b-report .news').append("<p>"+userHuman.name+": fregate added to the map</p>");
 
-  /*
-  HUMAN - DESTRUCTOR warship
-  */
+  //\\//\\ HUMAN - DESTRUCTOR //\\//\\
   }else if(userHuman.getShipName[0] === "destructor" || userHuman.getShipName[1] === "destructor"){
 
     userHuman.setShipLength.push("destructor");
     userHuman.cellSelected.push([cellValueRow,cellValueCol]);
 
     if(!$('#human').hasClass("shipVertical")){
-
       $(this).addClass("three-cell-ship").next().addClass("three-cell-ship").next().addClass("three-cell-ship");
 
       var bFormat = cellValueCol.slice(-1),
@@ -78,19 +74,8 @@ Player.prototype.setShipBoard = function() {
       cFormat2 = Number(cFormat)+2,
       cFormat3 = "c-"+cFormat2;
 
-      userHuman.cellDestructor = [{
-        row: cellValueRow,
-        col: cellValueCol
-      },{
-        row: cellValueRow,
-        col: bFormat3
-      },{
-        row: cellValueRow,
-        col: cFormat3
-      }];
-
+      userHuman.battleshipDestructor(3,cellValueRow,cellValueCol,cellValueRow,bFormat3,cellValueRow,cFormat3);
     }else{
-
       var bRotateFormat = cellValueRow.slice(-1),
       bRotateFormat2 = Number(bRotateFormat)+1,
       bRotateFormat3 = "r-"+bRotateFormat2;
@@ -103,17 +88,7 @@ Player.prototype.setShipBoard = function() {
       $("#human").children("."+bRotateFormat3).children("."+cellValueCol).addClass("three-cell-ship");
       $("#human").children("."+cRotateFormat3).children("."+cellValueCol).addClass("three-cell-ship");
 
-      userHuman.cellDestructor = [{
-        row: cellValueRow,
-        col: cellValueCol
-      },{
-        row: bRotateFormat3,
-        col: cellValueCol
-      },{
-        row: cRotateFormat3,
-        col: cellValueCol
-      }];
-
+      userHuman.battleshipDestructor(3,cellValueRow,cellValueCol,bRotateFormat3,cellValueCol,cRotateFormat3,cellValueCol);
     }
 
     userHuman.getShipName = [];
@@ -131,7 +106,10 @@ Player.prototype.setShipBoard = function() {
   }
 };
 
-// COMPUTER- AGREGO LOS BARCOS ALEATORIAMENTE
+/*var canPlaceBoat = false;
+while (!canPlaceBoat) {}*/
+
+// COMPUTER - AGREGO LOS BARCOS ALEATORIAMENTE
 Player.prototype.setShipBoard_randomComputer = function() {
   var random1 = Math.floor(Math.random() * 10),
   random2 = Math.floor(Math.random() * 10),
@@ -162,31 +140,15 @@ Player.prototype.setShipBoard_randomComputer = function() {
     var dFormat = random2 + 1,
     dFormat2 = "c-"+dFormat;
 
-    userComputer.cellFregate = [{
-      row: rowRandom1,
-      col: cellRandom2
-    },{
-      row: rowRandom1,
-      col: dFormat2
-    }];
+    userComputer.battleshipFregate(2,rowRandom1,cellRandom2,rowRandom1,dFormat2);
     $("#computer").children("."+rowRandom1).children("."+cellRandom2).addClass("two-cell-ship").next().addClass("two-cell-ship");
 
     var eFormat = random4 + 1,
     eFormat2 = "c-"+eFormat;
-
     var fFormat = random4 + 2,
     fFormat2 = "c-"+fFormat;
 
-    userComputer.cellDestructor = [{
-      row: rowRandom3,
-      col: cellRandom4
-    },{
-      row: rowRandom3,
-      col: eFormat2
-    },{
-      row: rowRandom3,
-      col: fFormat2
-    }];
+    userComputer.battleshipDestructor(3,rowRandom3,cellRandom4,rowRandom3,eFormat2,rowRandom3,fFormat2);
     $("#computer").children("."+rowRandom3).children("."+cellRandom4).addClass("three-cell-ship").next().addClass("three-cell-ship").next().addClass("three-cell-ship");
 
     userComputer.cellSelected.push(["r-"+random1,"c-"+random2],["r-"+random3,"c-"+random4]);
@@ -211,37 +173,19 @@ Player.prototype.setShipBoard_randomComputer = function() {
     var dFormatRotate = random1 + 1,
     dFormatRotate2 = "r-"+dFormatRotate;
 
-    userComputer.cellFregate = [{
-      row: rowRandomRotate1,
-      col: cellRandomRotate2
-    },{
-      row: dFormatRotate2,
-      col: cellRandomRotate2
-    }];
+    userComputer.battleshipFregate(2,rowRandomRotate1,cellRandomRotate2,dFormatRotate2,cellRandomRotate2);
     $("#computer").children("."+rowRandomRotate1).children("."+cellRandomRotate2).addClass("two-cell-ship");
     $("#computer").children("."+dFormatRotate2).children("."+cellRandomRotate2).addClass("two-cell-ship");
 
     var eFormatRotate = random3 + 1,
     eFormatRotate2 = "r-"+eFormatRotate;
-
     var fFormatRotate = random3 + 2,
     fFormatRotate2 = "r-"+fFormatRotate;
 
-    userComputer.cellDestructor = [{
-      row: rowRandomRotate3,
-      col: cellRandomRotate4
-    },{
-      row: eFormatRotate2,
-      col: cellRandomRotate4
-    },{
-      row: fFormatRotate2,
-      col: cellRandomRotate4
-    }];
-
+    userComputer.battleshipDestructor(3,rowRandomRotate3,cellRandomRotate4,eFormatRotate2,cellRandomRotate4,fFormatRotate2,cellRandomRotate4);
     $("#computer").children("."+rowRandomRotate3).children("."+cellRandomRotate4).addClass("three-cell-ship");
     $("#computer").children("."+eFormatRotate2).children("."+cellRandomRotate4).addClass("three-cell-ship");
     $("#computer").children("."+fFormatRotate2).children("."+cellRandomRotate4).addClass("three-cell-ship");
-
 
     userComputer.cellSelected.push(["r-"+random1,"c-"+random2],["r-"+random3,"c-"+random4]);
     $('#computer-section .b-option .current span').text(userComputer.setShipLength.length);
