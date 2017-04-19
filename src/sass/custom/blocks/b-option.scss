@@ -9,6 +9,7 @@
   margin: 0 auto 20px auto;
   height: auto;
   .ships {
+    margin-bottom: 20px;
     ul {
       margin: 0;
       padding: 0;
@@ -61,5 +62,14 @@
         }
       }
     }
+  }
+  .current {
+    margin-bottom: 20px;
+  }
+  .rotate {
+    margin-bottom: 20px;
+  }
+  .reset {
+    margin-bottom: 20px;
   }
 }

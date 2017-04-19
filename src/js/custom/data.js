@@ -1,3 +1,10 @@
+function computerRandomFregate(random) {
+
+}
+function computerRandomDestructor(random) {
+
+}
+
 // HUMAN - AGREGO LOS BARCOS
 Player.prototype.setShipBoard = function() {
   var cellClassRow = $(this).parent().attr('class').split(' '),
@@ -6,7 +13,7 @@ Player.prototype.setShipBoard = function() {
   cellValueCol = cellClassCol[1];
 
   /*
-  FREGATE warship
+  HUMAN - FREGATE warship
   */
   if(userHuman.getShipName[0] === "fregate" || userHuman.getShipName[1] === "fregate"){
 
@@ -52,7 +59,7 @@ Player.prototype.setShipBoard = function() {
     $('.b-report .news').append("<p>"+userHuman.name+": fregate added to the map</p>");
 
   /*
-  DESTRUCTOR warship
+  HUMAN - DESTRUCTOR warship
   */
   }else if(userHuman.getShipName[0] === "destructor" || userHuman.getShipName[1] === "destructor"){
 
@@ -113,7 +120,7 @@ Player.prototype.setShipBoard = function() {
     $('.b-report .news').append("<p>"+userHuman.name+": destructor added to the map</p>");
 
   }
-  $('#human-section .b-option .ships .current span').text(userHuman.setShipLength.length);
+  $('#human-section .b-option .current span').text(userHuman.setShipLength.length);
 
   if(userHuman.setShipLength.length === 2){
     $('.js-init-game').removeAttr('disabled');
@@ -129,56 +136,117 @@ Player.prototype.setShipBoard_randomComputer = function() {
   var random1 = Math.floor(Math.random() * 10),
   random2 = Math.floor(Math.random() * 10),
   random3 = Math.floor(Math.random() * 10),
-  random4 = Math.floor(Math.random() * 10);
+  random4 = Math.floor(Math.random() * 10),
+  randomRotate = Math.floor(Math.random() * 2);
 
-  
-
-  if(random2 === 9){
-    random2 = random2 - 1;
-  }
-  if(random4 === 9){
-    random4 = random4 - 2;
-  }else if (random4 === 8) {
-    random4 = random4 - 1;
+  if(randomRotate === 0){
+    $('#computer').addClass("shipVertical");
   }
 
-  var rowRandom1 = "r-"+random1,
-  cellRandom2 = "c-"+random2,
-  rowRandom3 = "r-"+random3,
-  cellRandom4 = "c-"+random4;
+  if(!$('#computer').hasClass("shipVertical")){
 
-  var dFormat = random2 + 1,
-  dFormat2 = "c-"+dFormat;
+    if(random2 === 9){
+      random2 = random2 - 1;
+    }
+    if(random4 === 9){
+      random4 = random4 - 2;
+    }else if (random4 === 8) {
+      random4 = random4 - 1;
+    }
 
-  userComputer.cellFregate = [{
-    row: rowRandom1,
-    col: cellRandom2
-  },{
-    row: rowRandom1,
-    col: dFormat2
-  }];
+    var rowRandom1 = "r-"+random1,
+    cellRandom2 = "c-"+random2,
+    rowRandom3 = "r-"+random3,
+    cellRandom4 = "c-"+random4;
 
-  var eFormat = random4 + 1,
-  eFormat2 = "c-"+eFormat;
+    var dFormat = random2 + 1,
+    dFormat2 = "c-"+dFormat;
 
-  var fFormat = random4 + 2,
-  fFormat2 = "c-"+fFormat;
+    userComputer.cellFregate = [{
+      row: rowRandom1,
+      col: cellRandom2
+    },{
+      row: rowRandom1,
+      col: dFormat2
+    }];
+    $("#computer").children("."+rowRandom1).children("."+cellRandom2).addClass("two-cell-ship").next().addClass("two-cell-ship");
 
-  userComputer.cellDestructor = [{
-    row: rowRandom3,
-    col: cellRandom4
-  },{
-    row: rowRandom3,
-    col: eFormat2
-  },{
-    row: rowRandom3,
-    col: fFormat2
-  }];
+    var eFormat = random4 + 1,
+    eFormat2 = "c-"+eFormat;
 
-  $("#computer").children("."+rowRandom1).children("."+cellRandom2).addClass("two-cell-ship").next().addClass("two-cell-ship");
-  $("#computer").children("."+rowRandom3).children("."+cellRandom4).addClass("three-cell-ship").next().addClass("three-cell-ship").next().addClass("three-cell-ship");
+    var fFormat = random4 + 2,
+    fFormat2 = "c-"+fFormat;
 
-  userComputer.cellSelected.push(["r-"+random1,"c-"+random2],["r-"+random3,"c-"+random4]);
-  $('#computer-section .b-option .ships .current span').text(userComputer.setShipLength.length);
+    userComputer.cellDestructor = [{
+      row: rowRandom3,
+      col: cellRandom4
+    },{
+      row: rowRandom3,
+      col: eFormat2
+    },{
+      row: rowRandom3,
+      col: fFormat2
+    }];
+    $("#computer").children("."+rowRandom3).children("."+cellRandom4).addClass("three-cell-ship").next().addClass("three-cell-ship").next().addClass("three-cell-ship");
+
+    userComputer.cellSelected.push(["r-"+random1,"c-"+random2],["r-"+random3,"c-"+random4]);
+    $('#computer-section .b-option .current span').text(userComputer.setShipLength.length);
+
+  }else{
+
+    if(random1 === 9){
+      random1 = random1 - 1;
+    }
+    if(random3 === 9){
+      random3 = random3 - 2;
+    }else if (random3 === 8) {
+      random3 = random3 - 1;
+    }
+
+    var rowRandomRotate1 = "r-"+random1,
+    cellRandomRotate2 = "c-"+random2,
+    rowRandomRotate3 = "r-"+random3,
+    cellRandomRotate4 = "c-"+random4;
+
+    var dFormatRotate = random1 + 1,
+    dFormatRotate2 = "r-"+dFormatRotate;
+
+    userComputer.cellFregate = [{
+      row: rowRandomRotate1,
+      col: cellRandomRotate2
+    },{
+      row: dFormatRotate2,
+      col: cellRandomRotate2
+    }];
+    $("#computer").children("."+rowRandomRotate1).children("."+cellRandomRotate2).addClass("two-cell-ship");
+    $("#computer").children("."+dFormatRotate2).children("."+cellRandomRotate2).addClass("two-cell-ship");
+
+    var eFormatRotate = random3 + 1,
+    eFormatRotate2 = "r-"+eFormatRotate;
+
+    var fFormatRotate = random3 + 2,
+    fFormatRotate2 = "r-"+fFormatRotate;
+
+    userComputer.cellDestructor = [{
+      row: rowRandomRotate3,
+      col: cellRandomRotate4
+    },{
+      row: eFormatRotate2,
+      col: cellRandomRotate4
+    },{
+      row: fFormatRotate2,
+      col: cellRandomRotate4
+    }];
+
+    $("#computer").children("."+rowRandomRotate3).children("."+cellRandomRotate4).addClass("three-cell-ship");
+    $("#computer").children("."+eFormatRotate2).children("."+cellRandomRotate4).addClass("three-cell-ship");
+    $("#computer").children("."+fFormatRotate2).children("."+cellRandomRotate4).addClass("three-cell-ship");
+
+
+    userComputer.cellSelected.push(["r-"+random1,"c-"+random2],["r-"+random3,"c-"+random4]);
+    $('#computer-section .b-option .current span').text(userComputer.setShipLength.length);
+
+  }
+
   $("span.btn-ship").attr('disabled', 'disabled');
 };

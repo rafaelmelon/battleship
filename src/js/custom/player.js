@@ -64,7 +64,7 @@ Player.prototype.clearSelection = function(){
   userHuman.cellSelected = [];
   $(".js-get-ship").removeAttr("disabled");
   $('.js-init-game').attr('disabled', 'disabled');
-  $('#human-section .b-option .ships .current span').text(userHuman.cellSelected.length);
+  $('#human-section .b-option .current span').text(userHuman.cellSelected.length);
   $('.b-report .news').append("<p>"+userHuman.name+": reset map</p>");
   $("#human").find(".board-col").removeClass("two-cell-ship");
   $("#human").find(".board-col").removeClass("three-cell-ship");
@@ -113,7 +113,7 @@ Player.prototype.humanTarget = function() {
         $('.b-report .news').append("<p>"+userHuman.name+": fregate sunken!!!!</p>");
         $(".js-get-ship[data-ship-type='fregate']").addClass("sunken");
         userHuman.cellSelected.pop();
-        $('#human-section .b-option .ships .current span').text(userHuman.cellSelected.length);
+        $('#human-section .b-option .current span').text(userHuman.cellSelected.length);
       }
     }
 
@@ -129,7 +129,7 @@ Player.prototype.humanTarget = function() {
          $('.b-report .news').append("<p>"+userHuman.name+": destructor sunken!!!!</p>");
          $(".js-get-ship[data-ship-type='destructor']").addClass("sunken");
          userHuman.cellSelected.pop();
-         $('#human-section .b-option .ships .current span').text(userHuman.cellSelected.length);
+         $('#human-section .b-option .current span').text(userHuman.cellSelected.length);
        }
     }
   }
@@ -161,7 +161,7 @@ Player.prototype.computerTarget = function() {
       $('.b-report .news').append("<p>Enemy: fregate sunken!!!! <span>+40</span></p>");
       $("span.btn-ship[data-ship-type='fregate']").addClass("sunken");
       userComputer.cellSelected.pop();
-      $('#computer-section .b-option .ships .current span').text(userComputer.cellSelected.length);
+      $('#computer-section .b-option .current span').text(userComputer.cellSelected.length);
     }
   }
 
@@ -180,7 +180,7 @@ Player.prototype.computerTarget = function() {
        $('.b-report .news').append("<p>Enemy: destructor sunken!!!! <span>+50</span></p>");
        $("span.btn-ship[data-ship-type='destructor']").addClass("sunken");
        userComputer.cellSelected.pop();
-       $('#computer-section .b-option .ships .current span').text(userComputer.cellSelected.length);
+       $('#computer-section .b-option .current span').text(userComputer.cellSelected.length);
      }
   }
 
@@ -230,7 +230,7 @@ Player.prototype.rotate = function() {
     $("#human .p-stat.direction span").text("Vertical battleship");
     $('.b-report .news').append("<p><span>"+userHuman.name+": the battleship is oriented vertitcally</span></p>");
   } else {
-    $("#human .p-stat.direction span").text("the battleship is oriented horizontally");
+    $("#human .p-stat.direction span").text("Horizontal battleship");
   }
 };
 
