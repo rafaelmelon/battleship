@@ -274,7 +274,7 @@ Player.prototype.checkBattle = function() {
 
     $('.m-stat .h4').append(userHuman.name+" WIN!!");
     $('.m-stat .score').append("You rating: <span>"+userHuman.score+"</span>");
-    $('.m-stat .timing').append("You game time: <span>"+userHuman.timing+"</span>s");
+    $('.m-stat .timing').append("Game time: <span>"+userHuman.timing+"</span>s");
     $(".m-stat .b-panel").attr('data-class','win');
     //::TIC::TAC::TIC:: SET TIME OUT ::TIC::TAC::TIC::\\
     setTimeout(function(){
@@ -291,7 +291,7 @@ Player.prototype.checkBattle = function() {
 
     $('.m-stat .h4').append("The enemy has defeated you");
     $('.m-stat .score').append("You rating: <span>"+userHuman.score+"</span>");
-    $('.m-stat .timing').append("You game time: <span>"+userHuman.timing+"</span>s");
+    $('.m-stat .timing').append("Game time: <span>"+userHuman.timing+"</span>s");
     $(".m-stat .b-panel").attr('data-class','defeat');
     //::TIC::TAC::TIC:: SET TIME OUT ::TIC::TAC::TIC::\\
     setTimeout(function(){
