@@ -1,6 +1,7 @@
 $(document).ready(function(){
 
   $('.fx-game.music')[0].play();
+  $('.fx-game.music')[0].loop = true;
 
   $(".js-modal-player").modal('show');
 

@@ -155,6 +155,7 @@ Player.prototype.humanTarget = function() {
 Player.prototype.computerTarget = function() {
 
   $('.fx-game.cannon2')[0].play();
+  $('.fx-game.cannon-special')[0].play();
 
   $(this).addClass("target");
   $(".b-panel").attr('data-class','shot1');
