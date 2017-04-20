@@ -7,33 +7,37 @@
 
 
 .b-board {
-  width: 260px;
+  width: 258px;
+  height: 250px;
   margin: 0 auto 20px auto;
-  height: auto;
   position: relative;
-  border: 5px solid $grey-2;
+  animation: display 4s forwards infinite;
+  box-shadow: $shadow-2;
   .p-stat {
     position: absolute;
-    top: -20px;
+    top: -22px;
     font-size: 12px;
     &.score {
       left: 0;
+      span {
+        font-weight: 600;
+      }
     }
     &.direction {
       left: 0;
       right: 0;
+      top: 245px;
       span {
-        background-color: $alert-1;
-        color: $white;
-        padding: 0px 5px;
-        border-radius: 2px 2px 0 0;
+
       }
     }
     &.time-remaining {
       right: 0;
+      span {
+        font-weight: 600;
+      }
     }
   }
-
   .board-disabled {
     display: block;
     background-color: rgba(0,0,0,0.3);
@@ -41,6 +45,9 @@
     width: 100%;
     position: absolute;
     p {
+      font-family: $font-console;
+      font-size: 12px;
+      color: $text-radar;
       position: relative;
       top: 50%;
       left: 50%;
@@ -52,44 +59,95 @@
       display: none;
     }
   }
+
   .board-row {
     .board-col {
       width: 25px;
       height: 25px;
       display: inline-block;
       margin-bottom: -5px;
-      background-color: $primary-1;
-      box-shadow: inset 1px 1px 0 rgba(255,255,255,0.3);
-      cursor: pointer;
+      box-shadow: inset 1px 1px 0 rgba(255,255,255,0.2);
+      transition: background-color 500ms ease-out 1s;
+      &.target {
+        background-color: rgba(255,255,255,0.3);
+        &.touched {
+          background-color: $alert-1;
+          box-shadow: inset 0px 0px 20px $text-radar;
+          animation: fade 2s forwards infinite;
+        }
+      }
+      &.two-cell-ship {
+        background-color: rgba(56,255,208,0.6);
+        animation: fade 1s forwards;
+      }
+      &.three-cell-ship {
+        background-color: rgba(56,255,208,0.6);
+        animation: fade 1s forwards;
+      }
     }
   }
   &#human {
-    .board-row {
-      .board-col {
-        &.target {
-          background-color: $primary-1-1;
-        }
-        &.two-cell-ship {
-          background-color: blue;
-          &.target {
-            &.touched {
-              background-color: $alert-1;
+    &.enabled {
+      &.fregate {
+        .board-row {
+          .board-col {
+            &:hover {
+              background-color: rgba(56,255,208,0.6);
+              animation: fade 1s forwards infinite;
+              + div {
+                background-color: rgba(56,255,208,0.6);
+                animation: fade 1s forwards infinite;
+              }
             }
           }
         }
-        &.three-cell-ship {
-          background-color: yellow;
-          &.target {
-            &.touched {
-              background-color: $alert-1;
+        &.destructor {
+          .board-row {
+            .board-col {
+              &:hover {
+                background-color: rgba(56,255,208,0.6);
+                animation: fade 1s forwards infinite;
+                + div {
+                  background-color: rgba(56,255,208,0.6);
+                  animation: fade 1s forwards infinite;
+                  + div {
+                    background-color: rgba(56,255,208,0.6);
+                    animation: fade 1s forwards infinite;
+                  }
+                }
+              }
             }
           }
         }
-        &:hover {
-          background-color: rgba(140,0,20,0.3);
-          /*& + div {
-            background-color: rgba(140,0,20,0.3);
-          }*/
+      }
+      &.shipVertical {
+        &.fregate {
+          .board-row {
+            .board-col {
+              &:hover {
+                + div {
+                  background-color: inherit;
+                  animation: inherit;
+                }
+              }
+            }
+          }
+          &.destructor {
+            .board-row {
+              .board-col {
+                &:hover {
+                  + div {
+                    background-color: inherit;
+                    animation: none;
+                    + div {
+                      background-color: inherit;
+                      animation: inherit;
+                    }
+                  }
+                }
+              }
+            }
+          }
         }
       }
     }
@@ -97,29 +155,50 @@
   &#computer {
     .board-row {
       .board-col {
-        &.target {
-          background-color: #01767D;
-        }
-        &.two-cell-ship {
-          background-color: blue;
-          &.target {
-            &.touched {
-              background-color: $alert-1;
-            }
-          }
-        }
-        &.three-cell-ship {
-          background-color: yellow;
-          &.target {
-            &.touched {
-              background-color: $alert-1;
-            }
-          }
-        }
         &:hover {
-          background-color: rgba(140,0,20,0.3);
+          background-color: rgba(56,255,208,0.6);
+          animation: fade 1s forwards infinite;
         }
       }
     }
+  }
+}
+
+@keyframes fade {
+  0% {
+    background-color:rgba(56,255,208,0.6);
+  }
+  50% {
+    background-color:rgba(56,255,208,0.9);
+  }
+  0% {
+    background-color:rgba(56,255,208,0.6);
+  }
+}
+
+@keyframes fire {
+  0% {
+    background-color:rgba(255, 2, 0, 0.3);
+  }
+  35% {
+    background-color:$alert-1;
+  }
+  70% {
+    background-color:rgba(255, 146, 0, 0.6);
+  }
+  100% {
+    background-color:rgba(255, 2, 0, 0.3);
+  }
+}
+
+@keyframes display {
+  0% {
+    background-color:rgba(34, 151, 158, 1);
+  }
+  50% {
+    background-color:rgba(31, 171, 158, 1);
+  }
+  100% {
+    background-color:rgba(34, 151, 158, 1);
   }
 }

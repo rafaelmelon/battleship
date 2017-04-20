@@ -3,46 +3,235 @@
 /*
   CUSTOM TEMPLATE
 */
+
+$font-text: 'Roboto Slab', serif;
+$font-enfasis: 'Teko', sans-serif;
+$font-console: 'Inconsolata', monospace;
+
+$shadow-1: inset -5px -10px 40px rgba(0,0,0,0.6);
+$shadow-2: inset -5px -5px 80px rgba(0,0,0,0.5);
+
 html,body{
   height: 100%;
-  //font-family: 'Bree Serif', serif;
+  font-family: $font-text;
 }
 
 .wrapper {
   height: 100%;
-  background-color: $white;
-  /*background-image: url("../img/bg/background2.jpg");
-  background-size: cover;*/
   padding-top: 20px;
-}
-
-.g-board {
-  //background-color: $white;
-  //background-image: url(../img/pattern/redox_01.png);
-  border: 5px solid $grey-2;
-  text-align: center;
-  padding: 0;
-  &.ImperialJapaneseNavy {
-    border: 5px solid yellow;
+  padding-bottom: 20px;
+  background-image: url(../img/pattern/squared_metal.png);
+  .h1 {
+    font-family: $font-enfasis;
+    font-size: 80px;
+    text-shadow: 1px 1px 1px $white;
+    margin: 0;
+    padding: 0;
   }
-  &.ImperialGermanNavy {
-    border: 5px solid $grey-4;
-  }
-  &.UnitedStatesNavy {
-    border: 5px solid blue;
-  }
-  &.SovietUnionNavy {
-    border: 5px solid $alert-1;
-  }
-  header {
-    margin-top: 20px;
-    margin-bottom: 20px;
-    .h2 {
-      min-height: 35px;
-      margin: 0;
+  .g-board {
+    text-align: center;
+    padding: 0;
+    box-shadow: 0px 0px 5px rgba(0,0,0,0.5);
+    background-color: $grey-2;
+    border: 4px solid $grey-2;
+    border-radius: 10px;
+    .b-board {
+      border-radius: 10px;
     }
-    & > div {
-      min-height: 35px;
+    .b-report {
+      .news {
+        border-radius: 10px;
+      }
+    }
+    .b-panel {
+      border: 4px solid $grey-3;
+    }
+
+    &.ImperialJapaneseNavy {
+      color: $japan-color-3;
+      background-color: $japan-color-1;
+      .b-header {
+        .flag {
+          background-image: url(../img/flags/icon-japan.jpg);
+          border: 4px solid $japan-color-3;
+        }
+      }
+      .b-board {
+        border: 4px solid $japan-color-3;
+      }
+      .b-option {
+        .ships {
+          ul {
+            li {
+              path {
+                fill: $japan-color-3;
+              }
+              .btn-ship {
+                &[disabled="disabled"] {
+                  path {
+                    fill: $japan-color-2;
+                  }
+                }
+              }
+              span.btn-ship {
+                &[disabled="disabled"] {
+                  path {
+                    fill: $japan-color-2;
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+    &.UnitedStatesNavy {
+      color: $usa-color-3;
+      background-color: $usa-color-1;
+      .b-header {
+        .flag {
+          background-image: url(../img/flags/icon-usa.jpg);
+          border: 4px solid $usa-color-3;
+        }
+      }
+      .b-board {
+        border: 4px solid $usa-color-3;
+      }
+      .b-option {
+        .ships {
+          ul {
+            li {
+              path {
+                fill: $usa-color-3;
+              }
+              .btn-ship {
+                &[disabled="disabled"] {
+                  path {
+                    fill: $usa-color-2;
+                  }
+                }
+              }
+              span.btn-ship {
+                &[disabled="disabled"] {
+                  path {
+                    fill: $usa-color-2;
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+    &.ImperialGermanNavy {
+      color: $germany-color-3;
+      background-color: $germany-color-1;
+      .b-header {
+        .flag {
+          background-image: url(../img/flags/icon-german.jpg);
+          border: 4px solid $germany-color-3;
+        }
+      }
+      .b-board {
+        border: 4px solid $germany-color-3;
+      }
+      .b-option {
+        .ships {
+          ul {
+            li {
+              path {
+                fill: $germany-color-3;
+              }
+              .btn-ship {
+                &[disabled="disabled"] {
+                  path {
+                    fill: $germany-color-2;
+                  }
+                }
+              }
+              span.btn-ship {
+                &[disabled="disabled"] {
+                  path {
+                    fill: $germany-color-2;
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+    &.SovietUnionNavy {
+      color: $urss-color-3;
+      background-color: $urss-color-1;
+      .b-header {
+        .flag {
+          background-image: url(../img/flags/icon-urss.jpg);
+          border: 4px solid $urss-color-3;
+        }
+      }
+      .b-board {
+        border: 4px solid $urss-color-3;
+      }
+      .b-option {
+        .ships {
+          ul {
+            li {
+              path {
+                fill: $urss-color-3;
+              }
+              .btn-ship {
+                &[disabled="disabled"] {
+                  path {
+                    fill: $urss-color-2;
+                  }
+                }
+              }
+              span.btn-ship {
+                &[disabled="disabled"] {
+                  path {
+                    fill: $urss-color-2;
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+
+  .row-no-padding {
+    [class*="col-"] {
+      padding-left: 0 !important;
+      padding-right: 0 !important;
+    }
+  }
+
+  .modal {
+    .modal-header {
+      .h2 {
+        font-size: 40px;
+      }
+    }
+    .modal-content {
+      text-align: center;
+      border: 4px solid $grey-2;
+      border-radius: 10px;
+    }
+    .modal-footer {
+      text-align: center;
+      border-top: none;
+      padding-bottom: 30px;
+    }
+  }
+
+  .btn {
+    font-family: $font-console;
+    font-size: 14px;
+    &.btn-default {
+      border-width: 2px;
+      border-radius: 5px;
     }
   }
 }

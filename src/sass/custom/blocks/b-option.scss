@@ -31,6 +31,7 @@
           background-color: transparent;
           margin: 0;
           padding: 0;
+          transition: all 1s ease;
           &[disabled="disabled"] {
             path {
               fill: $grey-2;
@@ -39,6 +40,7 @@
           &.sunken {
             path {
               fill: $alert-1;
+              animation: fire2 2s forwards infinite;
             }
           }
         }
@@ -71,5 +73,17 @@
   }
   .reset {
     margin-bottom: 20px;
+  }
+}
+
+@keyframes fire2 {
+  0% {
+    fill:rgba(255, 2, 0, 0.3);
+  }
+  50% {
+    fill:rgba(255, 2, 0, 1);
+  }
+  100% {
+    fill:rgba(255, 2, 0, 0.3);
   }
 }

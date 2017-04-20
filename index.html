@@ -5,19 +5,29 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>Battleship Game</title>
-  <link href="https://fonts.googleapis.com/css?family=Bree+Serif" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Inconsolata" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Roboto+Slab:400,700" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Teko:600" rel="stylesheet">
   <link rel="stylesheet" href="src/css/main.min.css">
 </head>
 <body>
   <div class="wrapper">
     <div class="container">
       <div class="row">
+        <div class="col-md-12 text-center">
+          <header class="b-header">
+            <h1 class="h1">Battleship</h2>
+          </header>
+        </div>
+      </div>
+      <div class="row">
 
         <div class="col-md-4">
           <section id="human-section" class="g-board">
-            <header>
+            <header class="b-header">
+              <div class="flag"></div>
               <h2 class="h2 js-player-name"></h2>
-              <div class="js-player-navy"></div>
+              <div class="navy js-player-navy"></div>
             </header>
             <div id="human" class="b-board">
               <div class="p-stat score">
@@ -91,32 +101,33 @@
                 <button class="btn btn-default btn-xs btn-rotate" type="button" name="button" disabled="disabled">Rotate battleship</button>
               </div>
               <div class="reset">
-                <button class="btn btn-link btn-xs js-clear-board" type="button" name="button">Clear board</button>
+                <button class="btn btn-default btn-xs js-clear-board" type="button" name="button">Clear board</button>
               </div>
             </div>
           </section>
         </div>
         <div class="col-md-4">
           <section class="g-board">
-            <header>
+            <header class="b-header">
               <h2 class="h2">War report</h2>
-              <div>Live</div>
+              <div class="live"><span></span> Live</div>
             </header>
-            <!--<div class="b-panel" data-class=""></div>-->
+            <div class="b-panel" data-class="sea1"></div>
             <div class="b-report">
               <div class="news"></div>
               <div class="info">
-                <button class="btn btn-success js-init-game" type="button" name="button" disabled="disabled">PLAY!</button>
-                <!--<button class="btn btn-link js-reset-game" type="button" name="button">Reset game</button>-->
+                <button class="btn btn-default js-init-game" type="button" name="button" disabled="disabled">PLAY!</button>
+                <button class="btn btn-default js-reload" type="button" name="button">Reset game</button>
               </div>
             </div>
           </section>
         </div>
         <div class="col-md-4">
           <section id="computer-section" class="g-board">
-            <header>
+            <header class="b-header">
+              <div class="flag"></div>
               <h2 class="h2 js-player-name"></h2>
-              <div class="js-player-navy"></div>
+              <div class="navy js-player-navy"></div>
             </header>
             <div id="computer" class="b-board">
               <div class='board-disabled'></div>
@@ -169,32 +180,39 @@
     </div>
 
     <!-- Modal -->
-    <div class="modal fade js-modal-player"tabindex="-1" role="dialog">
+    <div class="modal fade js-modal-player m-init"tabindex="-1" role="dialog">
       <div class="modal-dialog" role="document">
         <div class="modal-content">
           <div class="modal-header">
-            <!--<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>-->
-            <h4 class="modal-title">Welcome to Battleship Game</h4>
+            <h4 class="h2 modal-title">Welcome to Battleship Game</h4>
           </div>
           <div class="modal-body">
-            <h4 class="h4">Write your player name</h4>
-            <div class="form-group">
+            <h4 class="h4">Player name</h4>
+            <div class="form-group user-name">
               <input type="text" class="js-user-id form-control" placeholder="Name">
             </div>
             <h4 class="h4">Select your navy</h4>
-            <div class="form-group">
-              <label class="radio-inline">
-                <input type="radio" name="navyOption" value="Imperial Japanese Navy">Imperial Japanese Navy
-              </label>
-              <label class="radio-inline">
-                <input type="radio" name="navyOption" value="Imperial German Navy">Imperial German Navy
-              </label>
-              <label class="radio-inline">
-                <input type="radio" name="navyOption" value="United States Navy">United States Navy
-              </label>
-              <label class="radio-inline">
-                <input type="radio" name="navyOption" value="Soviet Union Navy">Soviet Union Navy
-              </label>
+            <div class="form-group user-navy">
+              <div class="radio jap">
+                <label>
+                  <input type="radio" name="navyOption" value="Imperial Japanese Navy">Imperial Japanese Navy
+                </label>
+              </div>
+              <div class="radio ger">
+                <label>
+                  <input type="radio" name="navyOption" value="Imperial German Navy">Imperial German Navy
+                </label>
+              </div>
+              <div class="radio usa">
+                <label>
+                  <input type="radio" name="navyOption" value="United States Navy">United States Navy
+                </label>
+              </div>
+              <div class="radio urs">
+                <label>
+                  <input type="radio" name="navyOption" value="Soviet Union Navy">Soviet Union Navy
+                </label>
+              </div>
             </div>
           </div>
           <div class="modal-footer">
@@ -204,10 +222,35 @@
       </div>
     </div>
 
+    <!-- Modal -->
+    <div class="modal fade js-modal-stat m-stat"tabindex="-1" role="dialog">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-body text-center">
+            <h4 class="h4"></h4>
+            <p class="score"></p>
+            <p class="timing"></p>
+            <div class="b-panel" data-class="win"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <audio class="fx-game music" src="src/fx/game.mp3"></audio>
+    <audio class="fx-game ocean" src="src/fx/ocean.mp3"></audio>
+    <audio class="fx-game beep" src="src/fx/beep.mp3"></audio>
+    <audio class="fx-game cannon1" src="src/fx/cannon1.mp3"></audio>
+    <audio class="fx-game cannon2" src="src/fx/cannon2.mp3"></audio>
+    <audio class="fx-game cannon-special" src="src/fx/cannon-special.mp3"></audio>
+    <audio class="fx-game explosion1" src="src/fx/explosion1.mp3"></audio>
+    <audio class="fx-game explosion2" src="src/fx/explosion2.mp3"></audio>
+    <audio class="fx-game click1" src="src/fx/click1.mp3"></audio>
+    <audio class="fx-game click2" src="src/fx/click2.mp3"></audio>
+    <audio class="fx-game speech1" src="src/fx/speech1.mp3"></audio>
+    <audio class="fx-game sunken" src="src/fx/sunken.mp3"></audio>
+    <audio class="fx-game defeat" src="src/fx/defeat.mp3"></audio>
+    <audio class="fx-game win" src="src/fx/win.mp3"></audio>
   </div>
-
-
-
 
   <script type="text/javascript" src="https://code.jquery.com/jquery-3.1.1.slim.min.js"></script>
   <script type="text/javascript" src="src/js/bootstrap/bootstrap.min.js"></script>
