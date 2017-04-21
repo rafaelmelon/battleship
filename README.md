@@ -1,87 +1,34 @@
-![Ironhack Logo](https://i.imgur.com/1QgrNNw.png)
+![Ironhack Logo](https://avatars0.githubusercontent.com/u/8311767?v=3&s=460)
 
 # JS | Battleship Game
 
 ## Sobre el juego
 
-Para poder jugar etc etc:
+Características del juego:
 
-- Build your own Pong game, using HTML, CSS and JavaScript
-- Create the logic of the game using JavaScript classes
-- Separate the logic of the game from the JavaScript DOM operations
-- Structure JavaScript files according to the game classes
+- 2 jugadores, uno es máquina
+- 4 facciones (URSS, Japón, Alemania y EEUU)
+- 2 tipos de barcos (fragata y destructor)
 
-## Requirements
+## Objetivo
 
-- [Fork this repo](https://guides.github.com/activities/forking/)
-- Clone this repo into your `~/code/labs`
+- Conseguir destruir a la flota enemiga
+- Terminar el juego antes de 5min
 
-## Submission
+## Breve tutorial
 
-Upon completion, run the following commands:
+- Inicia el juego y elige tu nombre de usuario
+- Elige tu facción
+- Una vez en el tablero debes añadir tus dos barcos
+- Selecciona primero un tipo de barco
+- Selecciona ROTATE para podere modificar la orientación del barco (vertical u horizontal)
+- Una vez añadidos a tu mapa empieza el juego con el botón PLAY!
+- Clicka en el tablero de la máquina para continuera con el juego
 
-```
-$ git add .
-$ git commit -m "done"
-$ git push origin master
-```
+## Para ganar...
 
-Navigate to your repo and create a Pull Request -from your master branch to the original repository master branch.
+Debes hundir todos los barcos de la flota enemiga. Debes reducirlos clickando en el mapa de la máquina. Cada vez que atacas y tocas un barco enemigo se sumará una puntuación a tu marcador. La puntuación aumentará cuanto menor sea el tiempo de juego jugado. El barco de tipo fragata recibe menos puntuación que los del tipo destructor.
 
-In the Pull request name, add your name and last names separated by a dash "-"
+## Extra
 
-## Deliverables
-
-Remember to add every file needed to make your game work. Don't forget external libraries (`lib/`) and other resources.
-
-## Introduction
-
-![Ping Pong Pic](https://i.imgur.com/XOUlFqu.png)
-
-In this Learning Unit, we are going to build one of the first computer games ever created: [Pong](https://en.wikipedia.org/wiki/Pong).
-
-We have a ball and two paddles at each side of a table.
-
-- The left paddle belongs to the user, and is going to be controlled with the keyboard arrows
-- The right paddle belongs to the computer, and is going to be automatically controlled by the application
-- The ball is going to move in a random direction at the beginning. It will rebound when reaches the top or bottom side of the board or is hit by a paddle
-
-The goal is to score 7 points against the computer. A point is won if the ball reaches the right or left side of the board. Each player has to prevent the ball from reaching their side of the board by returning the ball with the paddle.
-
-
-## The Board
-
-- In the `board.js` file, let's code the functions we will need to handle the game. The Board will hold three elements: the user's paddle, the computer's paddle and the ball
-- In this file we will create the function to start, restart and stop the game and a function to check the game status. This function will be executed recurrently to render the updated elements
-
-## The Ball
-
-- In the `ball.js` file we will hold the functions to make the ball move and recognize the edges. If this happens, rebound in the opposite direction.
-- These functions are:
-	- Set a random direction to start the movement
-	- Keep moving the ball in the same direction until it reaches an obstacle, or the right or left side of the board
-	- Score a point to a paddle when needed
-	- Restart the ball position when a point is scored
-
-## The Paddle
-
-- In the `paddle.js` file we will create the functions to relocate the paddles in their initial positions if a point is scored
-- It will also detect when a paddle is hit by the ball
-
-## User interactions
-
-The user has only two input possibilities: Arrow up or Arrow down. This will move their paddle in the desired direction.
-
-In the `index.js` file we will create the methods to receive user's input.
-
-## The computer has to play
-
-Also, in the `index.js` we will create the method to make the computer play. The computer's paddle position should follow the ball at anytime to emulate intelligence.
-
-## Summary
-
-In this learning unit we created a Ping Pong game by separating at first the logic from the rendering. We also implemented a recurrent function with an interval to update and render the elements in the screen.
-
-## Extra Resources
-
-- [Ping Pong with Canvas](http://cssdeck.com/labs/ping-pong-game-tutorial-with-html5-canvas-and-sounds) - A tutorial to create another version of the ping pong game using canvas.
+- JUEGO SIN TERMINAR, pronto espero introducir mejoras...
