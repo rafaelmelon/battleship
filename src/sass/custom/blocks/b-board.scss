@@ -69,7 +69,19 @@
       box-shadow: inset 1px 1px 0 rgba(255,255,255,0.2);
       transition: background-color 500ms ease-out 1s;
       &.target {
-        background-color: rgba(255,255,255,0.3);
+        position: relative;
+        &:after {
+          content: "";
+          width: 20px;
+          height: 20px;
+          background-color: rgba(56,255,208,0.3);
+          position: absolute;
+          top: 50%;
+          left: 50%;
+          transform: translate(-50%, -50%);
+          border-radius: 50%;
+          transition: all 500ms ease-out 1s;
+        }
         &.touched {
           background-color: $alert-1;
           box-shadow: inset 0px 0px 20px $text-radar;
