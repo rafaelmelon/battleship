@@ -1,4 +1,4 @@
-![Ironhack Logo](https://avatars0.githubusercontent.com/u/8311767?v=3&s=460)
+![Battleship Logo](src/favicon/apple-icon-120x120.png)
 
 # JS | Battleship Game
 
